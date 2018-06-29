@@ -8,8 +8,54 @@ module.exports = (sequelize, DataTypes) => {
     last_name: DataTypes.STRING,
     gender: DataTypes.STRING,
     birthday: DataTypes.DATE,
-    email: DataTypes.STRING,
-    phone: DataTypes.STRING
+    email: {
+      type: DataTypes.STRING,
+      validate: {
+        isEmail: {
+          args: true,
+          msg: "Email tidak valid"
+        },
+        is: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        isEmailUnique: 
+          function(emailInput, next) {
+            Student.find({
+              where: {
+                email: emailInput
+              }
+            })
+            .then(validasiEmail => {
+              if (validasiEmail != null) {
+                next("Email sudah ada yang menggunakan. Silahkan gunakan email yang lain")
+              } else {
+                next()
+              }
+            })
+          },
+      }
+    },
+    phone: {
+      type: DataTypes.STRING,
+      validate: {
+        len: {
+          args: [10, 13],
+          msg: "Phone length must be 10-13"
+        },
+        not: {
+          args: ["[a-z]",'i'],
+          msg: "Phone not allow letters"
+        },
+        not: {
+          args: ["[a-z]",'i'],
+          msg: "Phone not allow alphanumeric"
+        } 
+      }
+    },
+    tinggi_badan: {
+      type: Sequelize.INTEGER,
+      validate: {
+        min: 150
+      }
+    }
   }, {});
 
   //instance state method

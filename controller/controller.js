@@ -2,8 +2,8 @@ const Model = require("../models")
 const View = require("../view/view")
 
 class Controller {
-  static add (first_name, last_name, gender, birthday, email, phone) {
-    Model.Student.create({first_name: first_name, last_name: last_name, gender: gender, birthday: birthday, email: email, phone: phone})
+  static add (first_name, last_name, gender, birthday, email, phone, tinggiBadan) {
+    Model.Student.create({first_name: first_name, last_name: last_name, gender: gender, birthday: birthday, email: email, phone: phone, tinggi_badan: tinggiBadan})
       .then(data => {
         const dataStudent = data.get({plain: true})
         View.messageInfo(dataStudent)  
@@ -48,9 +48,8 @@ class Controller {
       }
     })
   }
-
-
-
 }
+
+Controller.add("alex", "qur", "male", "1959-08-14", "adhajsahjdx@yahoo.co", "085727877372", 172)
 
 module.exports = Controller
