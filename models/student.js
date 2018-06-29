@@ -6,8 +6,28 @@ module.exports = (sequelize, DataTypes) => {
     last_name: DataTypes.STRING,
     gender: DataTypes.STRING,
     birthday: DataTypes.DATEONLY,
-    email: DataTypes.STRING,
-    phone: DataTypes.STRING
+    email: { // email validation works if without symbol @ in value, but still cant validate redundant email address
+              type: DataTypes.STRING,
+              validate: {
+                  is: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+              },
+            },
+    phone: { // phone validation works
+              type: DataTypes.STRING,
+              validate: {
+                  is: /^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?[\-\.\ \\\/]?(\d+))?$/
+              }
+           },
+    height: { // height validation works
+              type: DataTypes.INTEGER,
+              validate: {
+                  isHeight(value) {
+                      if (value < 0 || value > 150) {
+                          throw new Error('Height value unvalid')
+                      }
+                  }
+             }
+           }
   }, {});
 
   student.prototype.getFullname = function() {
@@ -37,3 +57,6 @@ module.exports = (sequelize, DataTypes) => {
   };
   return student;
 };
+
+// Student.activate()
+// student.activate()
