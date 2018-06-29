@@ -43,6 +43,16 @@ class Controller {
         console.log('Data tidal ditemukan')
       })
   }
+
+  static AddNewStudent(first_name, last_name, gender, birthday, email, phone, height){
+    Model.student.addStudent(first_name, last_name, gender, birthday, email, phone, height)
+      .then((newStudent) =>{
+        console.log('Data has been Added');
+      })
+      .catch((err) =>{
+        console.log(err.message);
+      })
+  }
 }
 
 

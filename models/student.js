@@ -5,8 +5,23 @@ module.exports = (sequelize, DataTypes) => {
     last_name: DataTypes.STRING,
     gender: DataTypes.STRING,
     birthday: DataTypes.DATE,
-    email: DataTypes.STRING,
-    phone: DataTypes.STRING
+    email: {
+      type: DataTypes.STRING,
+      validate: {isEmail: { args: true, msg: "Your email is Wrong"}},
+    },
+    phone: {
+      type: DataTypes.INTEGER,
+      validate: {
+        len: { args:[10, 13], msg: "Phone length must be b/w 10-13"},
+        not: { args:["[a-z]",'i'], msg: "Phone not allow letters",},
+        is: { args: /^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?[\-\.\ \\\/]?(\d+))?$/,
+              msg: "Phone not allow alphanumeric"}
+      },
+    },
+    height: {
+      type: DataTypes.INTEGER,
+      validate: { min: 150,},
+    }
   }, {});
   student.associate = function (models) {
     // associations can be defined here
@@ -20,20 +35,24 @@ module.exports = (sequelize, DataTypes) => {
   student.prototype.getAge = function (id) {
     let dataStudent = student.findOne({where: {id:id},raw:true})
     return dataStudent
-    // let age = Date.now() - dataStudent.birthday;
-    // let resultAge = new Date(age);
-    // return Math.abs(resultAge.getUTCFullYear() - 1970);
-    // let birthday = new Date(this.birthday)
-    // let now = new Date()
-    // let year = birthday.getFullYear()
-    // let yearNow = now.getFullYear()
-    // let result = yearNow - year
-    // return result
   };
 
   student.getFemaleStudent = function() {
     let dataFemaleStudent = student.findAll({where: {gender:"Female"}, raw:true})
     return dataFemaleStudent
+  }
+
+  student.addStudent = function(first_name, last_name, gender, birthday, email, phone, height){
+    let newStudent = student.create({
+      first_name: first_name,
+      last_name: last_name,
+      gender: gender,
+      birthday: birthday,
+      email: email,
+      phone: phone,
+      height: height
+    })
+    return newStudent
   }
 
 
