@@ -2,4 +2,8 @@
 
 const Controller = require('./Controllers/Controller')
 
-Controller.getStudentFullname()
+// Controller.getStudentsFullname()
+
+// Controller.getStudentsAge()
+
+Controller.showFemaleStudents()
