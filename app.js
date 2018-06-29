@@ -24,7 +24,7 @@ Model.Student.create({
     })
 
 
-///
+/
 
 
 
@@ -51,10 +51,19 @@ Model.Student.findAll()
 // static femaleStudents(){
 
 
-Model.Student.findByGender('female', (studentGender) => {
+Model.Student.findByGender('female', (studentGenders) => {
     // console.log(student)
+    studentGenders.forEach(studentGender => {
+        let fullName=`${studentGender.first_name} ${studentGender.last_name}`
+        console.log(studentGender.id)
+        console.log(studentGender.first_name)
+        console.log(studentGender.last_name)
+        // console.log(studentGender.i)
+        console.log(fullName)
 
-    console.log(studentGender)
+
+
+    })
     // console.log(studentGender)
     // console.log(studentGender.last_name)
     // console.log(studentGender.full_name)

@@ -37,7 +37,8 @@ module.exports = (sequelize, DataTypes) => {
         }, isNumeric: {
           args: true,
           msg: 'its not a number'
-        }
+        },
+        isAlphanumeric: true
 
       }
     },
@@ -50,7 +51,7 @@ module.exports = (sequelize, DataTypes) => {
 
     },
 
-    height:{
+    height: {
       type: DataTypes.INTEGER,
       validate: {
         min: 150,
