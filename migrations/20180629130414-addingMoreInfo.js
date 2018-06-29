@@ -3,8 +3,6 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     /*
-
-    
       Add altering commands here.
       Return a promise to correctly handle asynchronicity.
 
@@ -12,12 +10,11 @@ module.exports = {
       return queryInterface.createTable('users', { id: Sequelize.INTEGER });
     */
 
-    return [queryInterface.addColumn(
-      'Students',
-      'tinggi badan',
-      Sequelize.INTEGER
-    )
+
+    return [queryInterface.addColumn('Students', 'height', { type: Sequelize.INTEGER })
+
     ];
+
   },
 
   down: (queryInterface, Sequelize) => {
@@ -28,11 +25,5 @@ module.exports = {
       Example:
       return queryInterface.dropTable('users');
     */
-    return [queryInterface.removeColumn(
-      'Students',
-      'tinggi badan',
-    )
-
-    ];
   }
 };

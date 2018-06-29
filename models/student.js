@@ -12,23 +12,24 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         isEmail: {
           args: true,
-          msg: 'email must contain @ and .'
+          msg: 'email must contain @ and . or email alreay been used'
         },
         isUnique: function (email, cb) {
-
           Student.findOne({ where: { email: email } })
             .then(function (notAvailable) {
-
               if (notAvailable) {
                 cb(true)
+
               } else {
                 cb(false)
+
               }
             })
         }
       }
     },
     phone: {
+      type: DataTypes.INTEGER,
       validate: {
         len: {
           args: [10 - 13],
@@ -40,12 +41,22 @@ module.exports = (sequelize, DataTypes) => {
 
       }
     },
-    tinggi_badan: {
+    'tinggi badan': {
+      type: DataTypes.INTEGER,
       validate: {
         min: 150,
-      }
+      },
+
 
     },
+
+    height:{
+      type: DataTypes.INTEGER,
+      validate: {
+        min: 150,
+      },
+
+    }
 
   }, {});
   Student.associate = function (models) {

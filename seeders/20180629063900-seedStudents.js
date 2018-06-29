@@ -22,7 +22,7 @@ module.exports = {
       last_name: faker.name.lastName(),
       gender: 'female',
       birthday: faker.date.between('1990-01-01', '2000-01-05'),
-      email: faker.internet.email(),
+      email:'Newton_Schuster@hotmailcom',
       phone: faker.random.number({ min: 6280000, max: 6289999 }),
 
       createdAt: new Date(),
