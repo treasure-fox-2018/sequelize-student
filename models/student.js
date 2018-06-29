@@ -15,7 +15,11 @@ module.exports = (sequelize, DataTypes) => {
     phone: { // phone validation works
               type: DataTypes.STRING,
               validate: {
-                  is: /^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?[\-\.\ \\\/]?(\d+))?$/
+                  len: {
+                      args: [10,13],
+                      msg: "Length must be between 10 - 13"
+                  },
+                  isNumeric: true,
               }
            },
     height: { // height validation works
