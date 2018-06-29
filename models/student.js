@@ -8,6 +8,11 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     phone: DataTypes.STRING
   }, {});
+
+  student.prototype.getFullname = function() {
+      return this.first_name +' '+ this.last_name
+  }
+
   student.associate = function(models) {
     // associations can be defined here
   };
