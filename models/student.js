@@ -12,25 +12,45 @@ module.exports = (sequelize, DataTypes) => {
           args: true,
           msg: 'Wrong email format'
         },
-        isUnique: (value, next)=>{
+        isUnique: (value, cb)=>{
           Student.find({
             where: {
               email: value
             }
           })
-          .then((result) => {
+          .then(result => {
             if(result !== null){
-              return next('Another user has used that email') 
+              cb('Another user has used that email') 
             }
           })
         }
       }
     },
-    
-    phone: DataTypes.STRING,
+    phone: {
+      type: DataTypes.STRING,
+      validate: {
+        isAlphanumeric:{
+          args: true,
+          msg: 'Phone is only consisted of numbers'
+        },
+        not: {
+          args: ["[a-z]",'i'],
+          msg: 'Theres no letter in phone number'
+        },
+        len:{
+          args: [10,13],
+          msg: 'Phone number consisted of 10 to 13 numbers'
+        }
+      }
+    },
     height: {
       type: DataTypes.STRING,
-      validate: {min: 151}
+      validate: {
+        min: {
+          args: 151,
+          msg: 'Your height must be taller than 150cm'
+        }
+      }
     },
   }, {});
 

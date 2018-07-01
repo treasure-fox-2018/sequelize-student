@@ -2,9 +2,9 @@ const Model = require('./models');
 const command = process.argv[2]
 
 const add = (inputObj)=>{
-    Model.Student.create(inputObj).then(() => {
-        // if(err){
-        //     console.log(err.message)
+    Model.Student.create(inputObj).then((err) => {
+        if(!err){
+            console.log(err.message)}
         // } else {
         //     console.log(result)
         // }
