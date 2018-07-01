@@ -20,4 +20,4 @@ if (command == 'find') {
     let phone = argv[8]
     let student_height = argv[9]
     Controller.addStudentData(first_name, last_name, gender, birthday, email, phone, student_height)
-}
+} 

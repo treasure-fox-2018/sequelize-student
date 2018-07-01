@@ -10,8 +10,20 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           isEmail: {
             args: true,
-            msg: `Email must has "@" and "."` 
-          }
+            msg: `invalid email` 
+          },
+          isUnique: function(email, next) {
+            Student.find({
+              where: {email: email}
+            })
+            .then(function(email) {
+              if(email !== null) {
+                next(`Email address already in use`)
+              } else {
+                next()
+              }
+            })
+          },  
         }
       },
     phone: {

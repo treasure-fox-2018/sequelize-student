@@ -36,6 +36,7 @@ class Controller {
             //     console.log(dataFemaleStudent[i].last_name)
             //     console.log(fullName)
             // }
+
             dataFemaleStudent.forEach(function(dataFemaleStudent) {
                 var fullName = `${dataFemaleStudent.first_name} ${dataFemaleStudent.last_name}`
                 console.log(dataFemaleStudent.id)
@@ -68,3 +69,4 @@ class Controller {
 }
 
 module.exports = Controller
+
